@@ -2,39 +2,46 @@
 
 PSQL="psql --username=freecodecamp --dbname=number_guess -t --no-align -c"
 
-echo "~~~ NUMBER GUESSING ~~~"
+#echo "~~~ NUMBER GUESSING ~~~"
 
 MENU(){
 
   echo "Enter your username:"
   read username
 
-  if [ ${#username} -lt 22 ];
-  then
-    echo "the username inserted must be of 22 characters"
+  if ! [[ $input =~ ^[0-9]+$ ]]; then
+      # Input is not an integer
+
+      if [ ${#username} -lt 22 ];
+      then
+        echo "the username inserted must be of 22 characters"
+      else
+
+        user=$($PSQL "SELECT username FROM users WHERE username='$username';")
+
+        if [[ -z $user ]]
+        then
+
+          echo "Welcome, $username! It looks like this is your first time here."
+
+          INSERT_USER $username
+          GAME $username
+
+        else
+
+          games_played=$(GET_GAMES_PLAYED $username)
+          best_game=$(GET_BEST_GAME $username)
+          
+          echo "Welcome back, $username! You have played $games_played games, and your best game took $best_game guesses."
+
+          GAME $username
+
+        fi
+
+      fi
   else
-
-    user=$($PSQL "SELECT username FROM users WHERE username='$username';")
-
-    if [[ -z $user ]]
-    then
-
-      echo "Welcome, $username! It looks like this is your first time here."
-
-      INSERT_USER $username
-      GAME $username
-
-    else
-
-      games_played=$(GET_GAMES_PLAYED $username)
-      best_game=$(GET_BEST_GAME $username)
-      
-      echo "Welcome back, $username! You have played $games_played games, and your best game took $best_game guesses."
-
-      GAME $username
-
-    fi
-
+      # Input is an integer
+      echo "ERROR: The input is an integer."
   fi
 
 }
@@ -46,10 +53,11 @@ GAME(){
   #generate random value
   secret_number=$((RANDOM % 1000 + 1))
 
+  echo "Guess the secret number between 1 and 1000:"
+
   while true;
   do
 
-    echo "Guess the secret number between 1 and 1000:"
     read user_rand
 
     if [[ $user_rand =~ ^-?[0-9]+$ ]]; then
