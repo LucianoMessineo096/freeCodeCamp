@@ -9,7 +9,7 @@ MENU(){
   echo "Enter your username:"
   read username
 
-  if ! [[ $input =~ ^[0-9]+$ ]]; then
+  if ! [[ $username =~ ^[0-9]+$ ]]; then
       # Input is not an integer
 
       if [ ${#username} -lt 22 ];
