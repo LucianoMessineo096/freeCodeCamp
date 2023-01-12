@@ -61,20 +61,16 @@ app.get('/api/:date',(req,res)=>{
 app.listen(port,()=>{console.log('server started at port: '+port)})
 */
 
+//AT THE BOTTOM THE CORRECT CODE
 
-// init project
+
 var app = express();
 const port = 3000;
 
-// enable CORS (https://en.wikipedia.org/wiki/Cross-origin_resource_sharing)
-// so that your API is remotely testable by FCC 
-
 app.use(cors({optionsSuccessStatus: 200})); 
 
-// http://expressjs.com/en/starter/static-files.html
 app.use(express.static('public'));
 
-// http://expressjs.com/en/starter/basic-routing.html
 app.get("/", function (req, res) {
   res.sendFile(__dirname + '/client/index.htm');
 });
@@ -92,15 +88,10 @@ app.get('/api', (req,res) =>{
 
 app.get('/api/:date',(req,res) => {
 
-  //Handling data parameters with invalid format
-
   if(!Date.parse(req.params.date) && !Number(req.params.date))
   {
     return res.send({error: "Invalid Date"});
   }
-
-
-  //Checking for conditions when date parameter is given in microseconds.
 
   else if(!(/[-]/.test(req.params.date)) && Number(req.params.date))
   {
@@ -111,8 +102,6 @@ app.get('/api/:date',(req,res) => {
       utc: date.toUTCString()
     });
   } 
-
-  //For handling regular test cases when date parameter is in a valid date format.
 
   let date = new Date(req.params.date);
 
