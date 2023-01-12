@@ -86,7 +86,7 @@ app.get('/api', (req,res) =>{
   res.send(result);
 });
 
-app.get('/api/:date',(req,res) => {
+app.get('/api/:date?',(req,res) => {
 
   if(!Date.parse(req.params.date) && !Number(req.params.date))
   {
