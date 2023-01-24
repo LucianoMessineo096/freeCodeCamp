@@ -1,1 +1,30 @@
+<!DOCTYPE html>
 
+<html>
+   <head>
+      <title>Timestamp Microservice</title>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.3/jquery.min.js" integrity="sha512-STof4xm1wgkfm7heWqFJVn58Hm3EtS31XFaagaa8VMReCXAkQnJZ+jEy8PCC/iT18dFy95WcExNHFTqLyp72eQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+   </head>
+
+   <body>
+    <h1>URL Shortener Microservice</h1>
+    <div>
+      <h3>Short URL Creation</h3>
+      <p>Example: POST [project_url]/api/shorturl - https://www.google.com</p>
+
+      <form action="/api/shorturl" method="POST">
+        <label for="url">URL to be shortened</label>
+        <input id="url" type="text" name="url" value="https://www.freecodecamp.org">
+        <input type="submit" value="POST URL">
+      </form>
+
+      <h3>Example Usage:</h3>
+      <a href="/api/shorturl/?short_url=cAFNwF6Ag">[this project url]/api/shorturl/3</a>
+
+      <h4>Will Redirect to:</h4>
+      <p>https://forum.freecodecamp.org/</p>
+
+      <p>By<a href="https://www.freecodecamp.org">freeCodeCamp</a></p>
+    </div>
+  </body>
+</html>
