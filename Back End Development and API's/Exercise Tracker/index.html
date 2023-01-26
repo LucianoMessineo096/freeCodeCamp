@@ -1,0 +1,35 @@
+<html>
+
+  <head>
+
+    
+  </head>
+  <body>
+
+    <h3>CREATE NEW USER</h3>
+    <form action="/api/users" method="POST">
+      <div>POST /api/users</div>
+      <input name="username" type="text" placeholder="username">
+
+      <button type="submit">Submit</button>
+      
+    </form>
+
+    <h3>Add Exercises</h3>
+    <form action="/api/users/:_id/exercises" method="POST">
+      <div>POST /api/users/:_id/exercises</div>
+      <input id=":_id" name="_id" type="text" placeholder=":_id">
+      <input id="description" name="description" type="text" placeholder="description*">
+      <input id="duration" name="duration" type="number" min=0 placeholder="duration* (mins.)">
+      <input id="date" name="date" type="text" placeholder="date (yyyy-mm-dd)">
+      <button id="exercise-submit" type="submit">Submit</button>
+      
+    </form>
+
+    
+  </body>
+  <script src="./index.js" type="text/javascript"></script>
+
+
+  
+</html>
